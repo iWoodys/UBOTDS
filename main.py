@@ -201,11 +201,28 @@ async def actualizar_dolar():
                 await canal.send(embed=embed)
         except Exception as e:
             print(f"Error en actualización automática: {e}")
-        await asyncio.sleep(900)  # 15 minutos
+        await asyncio.sleep(43200)  # 15 minutos
 
 
 @bot.event
 async def on_ready():
     bot.loop.create_task(actualizar_dolar())  # Inicia la actualización cada 15 minutos
+
+
+# --- Flask trick for Render to detect an open port ---
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run():
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
+
+Thread(target=run).start()
+# --- End Flask trick ---
 
 bot.run(TOKEN)
