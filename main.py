@@ -1,4 +1,3 @@
-
 import discord
 from discord.ext import commands, tasks
 from discord import app_commands
@@ -19,11 +18,8 @@ if not TOKEN:
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-TOKEN = os.environ.get("DISCORD_TOKEN")
-
 CANAL_TEXTO_ID = 1354580489964359900  
 CANAL_DOLAR_ID = 123456789012345678  
-
 
 CONFIG_FILE = "config.json"
 
@@ -87,6 +83,8 @@ async def on_ready():
         print(f"🔁 Slash commands sincronizados ({len(synced)} comandos)")
     except Exception as e:
         print(f"❌ Error al sincronizar comandos: {e}")
+
+    bot.loop.create_task(actualizar_dolar())  # Inicia la actualización cada 15 minutos
 
 
 @bot.event
@@ -201,12 +199,7 @@ async def actualizar_dolar():
                 await canal.send(embed=embed)
         except Exception as e:
             print(f"Error en actualización automática: {e}")
-        await asyncio.sleep(43200)  # 15 minutos
-
-
-@bot.event
-async def on_ready():
-    bot.loop.create_task(actualizar_dolar())  # Inicia la actualización cada 15 minutos
+        await asyncio.sleep(1800)  # 30 minutos
 
 
 # --- Flask trick for Render to detect an open port ---
