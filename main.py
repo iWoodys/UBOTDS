@@ -214,6 +214,16 @@ def home():
 
 def run():
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
+    
+@app.route('/status')
+def status():
+    return {
+        "status": "online",
+        "bot": "UDevZone Bot",
+        "version": "1.0",
+        "message": "Todo en orden, el bot está funcionando correctamente 🚀"
+    }, 200
+
 
 Thread(target=run).start()
 # --- End Flask trick ---
