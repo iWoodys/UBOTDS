@@ -13,10 +13,13 @@ intents.guilds = True
 intents.voice_states = True
 intents.members = True
 
+TOKEN = os.environ.get("DISCORD_TOKEN")
+if not TOKEN:
+    raise ValueError("❌ DISCORD_TOKEN no está definido en las variables de entorno.")
+
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 TOKEN = os.environ.get("DISCORD_TOKEN")
-bot = commands.Bot(command_prefix="!", intents=intents)
 
 CANAL_TEXTO_ID = 1354580489964359900  
 CANAL_DOLAR_ID = 123456789012345678  
