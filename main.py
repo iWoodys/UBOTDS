@@ -223,6 +223,15 @@ def status():
         "version": "1.0",
         "message": "Todo en orden, el bot está funcionando correctamente 🚀"
     }, 200
+    
+@bot.tree.command(name="reiniciar", description="Reinicia el bot (solo admins).")
+async def reiniciar(interaction: discord.Interaction):
+    if not interaction.user.guild_permissions.administrator:
+        await interaction.response.send_message("⛔ No tenés permiso para usar este comando.", ephemeral=True)
+        return
+
+    await interaction.response.send_message("🔄 Reiniciando el bot...", ephemeral=True)
+    await bot.close()
 
 
 Thread(target=run).start()
