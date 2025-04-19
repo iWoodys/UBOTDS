@@ -107,7 +107,7 @@ async def on_voice_state_update(member, before, after):
         embed.set_footer(text="Administración UDevZone")
         embed.timestamp = discord.utils.utcnow()
 
-        await canal_texto.send(content="@everyone", embed=embed)
+        await canal_texto.send(content="¡Hola!", embed=embed)
 
 
 @bot.tree.command(name="texto", description="Envía un mensaje embed personalizado a un canal (solo admins).")
